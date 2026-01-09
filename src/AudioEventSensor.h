@@ -8,6 +8,7 @@ public:
     void begin(uint32_t baud=115200);
     bool available();
     String readEvent();             // Reads: +EVENT: <id>,<confidence>
+    void clearBuffer();             // NEW: Clear serial buffer
 
     // ---- Basic Commands ----
     bool getDetectTypes(String &out);
@@ -30,6 +31,6 @@ public:
 
 private:
     HardwareSerial *_serial;
-    String readLine(uint32_t timeout=200);
-    bool expectOK(const String &cmd);
+    String readLine(uint32_t timeout=500); // Increased default timeout
+    bool expectOK(const String &cmd, uint32_t timeout=500);
 };
